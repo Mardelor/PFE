@@ -1,0 +1,5 @@
+Voir make
++ préciser le Class-Path dans le MANIFEST.MF pour les libs externes
++ jar & racine du chemin précisé dans le même répertoire
+
+TODO : essayer d'utiliser les variables d'envirronnement pour pouvoir executer l'appli sans la dernière contrainte
