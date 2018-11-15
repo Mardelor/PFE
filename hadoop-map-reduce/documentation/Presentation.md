@@ -18,4 +18,3 @@ Créer un plugin ezTrace pour Hadoop en Java
 
 ## Plugin ezTrace pour Hadoop-Java
 ![Schéma de fonctionnement Java + ezTrace](images/hadoopTrace.png)
-
