@@ -19,7 +19,7 @@ public class MapClass extends Mapper<LongWritable, Text, Text, IntWritable> {
 
         while(st.hasMoreTokens()){
             word.set(st.nextToken());
-            context.write(word,one);
+            context.write(word, one);
         }
     }
 }
