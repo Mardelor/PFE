@@ -27,15 +27,14 @@ protected void map(...) {
       <w>369</w>
       <h>153</h>
     </coordinates>
-    <panel_attributes>Transformer
---
+    <panel_attributes>Transformer.java
 --
 public byte[] transform(... Class class...) {
     ...
     class.addField("HadoopTrace hTrace");
     ...
-    method.addBefore("hTrace.registerBeginMapper()");
-    method.addAfter("hTrace.registerEndMapper()");
+    method.addBefore("hTrace.registerMapperProlog()");
+    method.addAfter("hTrace.registerMapperEpilog()");
     ...
 }</panel_attributes>
     <additional_attributes/>
@@ -48,8 +47,7 @@ public byte[] transform(... Class class...) {
       <w>369</w>
       <h>54</h>
     </coordinates>
-    <panel_attributes>Agent
---
+    <panel_attributes>Agent.java
 --
 public static void premain(... Instrumentation inst)</panel_attributes>
     <additional_attributes/>
@@ -69,9 +67,9 @@ public class MapClass extends Mapper {
     HadoopTrace hTrace;
     @Override
     protected void map(...) {
-        hTrace.registerBeginMapper();
+        hTrace.registerMapperProlog();
         ...
-        hTrace.registerEndMapper();
+        hTrace.registerMapperEpilog();
 }</panel_attributes>
     <additional_attributes/>
   </element>
@@ -85,10 +83,10 @@ public class MapClass extends Mapper {
     </coordinates>
     <panel_attributes>HadoopTrace.java
 --
-registerBeginMapper()
-registerEndMapper()
-registerBeginReducer()
-registerEndReducer()</panel_attributes>
+registerMapperProlog()
+registerMapperEpilog()
+registerReducerProlog()
+registerReducerEpilog()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -103,10 +101,10 @@ registerEndReducer()</panel_attributes>
 --
 #include "eztrace.h"
 
-registerBeginMapper()
-registerEndMapper()
-registerBeginReducer()
-registerEndReducer()
+registerMapperProlog() {...}
+registerMapperEpilog() {...}
+registerReducerProlog() {...}
+registerReducerEpilog() {...}
 
 </panel_attributes>
     <additional_attributes/>
