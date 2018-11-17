@@ -1,9 +1,0 @@
-1. Mettre un bloc static dans son code Java pour charger la librairie :
-    System.loadLibrary("HelloWord")
-2. Générer le .h correspondant : javah -jni HelloWorld
-3. Créer son .c en important la lib <jni.h>
-4. Compiler le fichier en temps que shared-library
-    gcc -I/$JAVA_HOME/include -I/$JAVA_HOME/include/linux -c HelloWorld.c -o HelloWorld.o
-    gcc -shared -L LOCATION HelloWorld.o -o libHelloWorld.so
-5. Indiquer à Java ou chercher la librairie
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:LOCATION
