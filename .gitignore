@@ -1,5 +1,11 @@
+# JetBrains IDE files
 **/.idea
-**.class
-**.so
 **.iml
+
+# Java compiled files
+**.class
+**.jar
+
+# C compiled files
 **.o
+**.so
