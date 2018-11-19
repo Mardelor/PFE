@@ -15,7 +15,7 @@ and Java Wrapper Class
 Here are three little examples : 
 * hello.jar : Simple hello world in C call in Java - **Done**
 * hellothread.jar \[n\] \[t\] : Creates n Java Threads which print their pthread ID every second during t seconds - **Done** 
-* helloarg.jar : Call C fonctions with both primitives types and object exchange between Java & C - **Not done yet**
+* helloarg.jar : Call C fonctions with both primitives types and object exchange between Java & C - **Done**
 
 ## Use JNI
 To create hello.jar calling function from libhelloworld.so, simply specify in your Java class method's prototype with
