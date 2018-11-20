@@ -1,12 +1,15 @@
 ## Quick start
 Create output directory:
-mkdir out
+
+    mkdir out
 
 Compile:
-make.sh
+    
+    ./make.sh
 
 Test different jar executable:
-java -Djava.library.path=./out -jar ./out/\[JarName\].jar
+
+    java -Djava.library.path=./out -jar ./out/[JarName].jar
 
 ## What is it ?
 This sub-project is about using JNI (Java Native Interface) to create C library such as ezTrace plugins
@@ -24,17 +27,17 @@ the word 'native', and add a static block so that the JVM load the library :
 
 Then compile your class and generate a header file with option -h :
 
-javac -h OUTPUT_DIR Hello.java;
+    javac -h [OutputDir] Hello.java;
 
 Now just create your C library following the header file, and include jni.h :
 ![](doc/screen2.png)
 
 Compile it as a shared library and indicates gcc where to find jni.h :
 
-gcc -I${JAVA_HOME}/include -I${JAVA_HOME}/include/linux -shared -o libhelloworld.so hello.c
+    gcc -I${JAVA_HOME}/include -I${JAVA_HOME}/include/linux -shared -o libhelloworld.so hello.c
 
 Now just compile your Java Program add option when running your app :
 
-java -Djava.library.path=LIB_DIR -jar yourApp.jar
+    java -Djava.library.path=[LibDir] -jar yourApp.jar
 
 where LIB_DIR is the directory where you placed your .so
