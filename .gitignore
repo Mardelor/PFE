@@ -9,3 +9,7 @@
 # C compiled files
 **.o
 **.so
+
+# Miscellaneous
+**/output
+**/target
