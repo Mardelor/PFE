@@ -10,8 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>hadoop-application</artifactId>
 
+    <!-- Compilation Configuration -->
     <build>
         <plugins>
+
+            <!-- Dependency plugins : to include all in jar file -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -31,6 +34,8 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Build configuration to specify Main Class -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
