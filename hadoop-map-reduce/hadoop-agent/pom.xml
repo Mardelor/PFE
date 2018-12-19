@@ -21,7 +21,6 @@
     <!-- Compilation Configuration -->
     <build>
         <plugins>
-
             <!-- Dependency plugins : to include all in jar file -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -57,7 +56,7 @@
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
                         <manifestEntries>
-                            <Premain-Class>DurationAgent</Premain-Class>
+                            <Premain-Class>HadoopAgent</Premain-Class>
                             <Can-Redefine-Classes>false</Can-Redefine-Classes>
                             <Can-Retransform-Classes>true</Can-Retransform-Classes>
                         </manifestEntries>
