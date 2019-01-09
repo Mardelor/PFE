@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-cd ~/Projects/PFE/HelloWorld-Instrumentation/;
-rm out/*.class out/*.jar;
+rm -f out/*.class out/*.jar;
 
 javac -cp ./lib/javassist-3.14.0-GA.jar src/HelloWorld.java src/HelloWorldAgent.java src/HelloWorldTransformer.java -d ./out/;
 cd out;
