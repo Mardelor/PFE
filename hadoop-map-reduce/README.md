@@ -6,7 +6,7 @@ Use Maven to setUp Env:
 
     mvn clean install
     
-Make sure output directory doesn't exist and run :
+Make sure output directory doesn't exist, that you initialized JAVA_HOME environment variable and run :
 
     rm -rf hadoop-application/src/main/resources/output
     cd ${HOME}/.../hadoop-map-reduce/hadoop-agent/src/main/c

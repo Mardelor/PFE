@@ -18,7 +18,7 @@ public class HadoopTransformer implements ClassFileTransformer {
             System.out.println("Instrumenting......");
             try {
                 ClassPool classPool = ClassPool.getDefault();
-                // classPool.appendClassPath("/home/rem/.m2/repository/map-reduce-sample/hadoop-agent/1.0-SNAPSHOT/hadoop-agent-1.0-SNAPSHOT.jar");
+                classPool.importPackage("ezTrace");
                 // Makes CtClass to be able to modify it with javassist
                 CtClass ctClass = classPool.makeClass(new ByteArrayInputStream(classfileBuffer));
                 // Create field which contains all methods to use !
