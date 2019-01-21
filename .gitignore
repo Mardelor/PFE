@@ -1,6 +1,8 @@
 # JetBrains IDE files
+**/cmake-build-debug
 **/.idea
 **.iml
+**/CMakeLists.txt
 
 # Java compiled files
 **.class
