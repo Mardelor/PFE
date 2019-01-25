@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_HadoopTrace_mapProlog
-  (JNIEnv *, jobject);
+        (JNIEnv *, jobject);
 
 /*
  * Class:     ezTrace.HadoopTrace
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_HadoopTrace_mapProlog
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_HadoopTrace_mapEpilog
-  (JNIEnv *, jobject);
+        (JNIEnv *, jobject);
 
 /*
  * Class:     ezTrace.HadoopTrace
@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_HadoopTrace_mapEpilog
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_HadoopTrace_reduceProlog
-  (JNIEnv *, jobject);
+        (JNIEnv *, jobject);
 
 /*
  * Class:     ezTrace.HadoopTrace
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_HadoopTrace_reduceProlog
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_HadoopTrace_reduceEpilog
-  (JNIEnv *, jobject);
+        (JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }
