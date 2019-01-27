@@ -34,13 +34,38 @@ Pour cela, nous avons du nous familiariser avec plusieurs technologies :
 - La création d'un module ezTrace
 
 ## Réalisation
+Nous avons tout d'abord réaliser des mini-projets pour maîtriser JNI, l'instrumentation Java
+et le framework Hadoop MapReduce. Nous avons ensuite fusionné ces mini-projets afin d'aboutir
+à un prototype stable et fonctionnel du module ezTrace final.
+
 ### Prise en main des outils
-- Hadoop MapReduce
-- JNI
-- Java Instrumentation
-- ezTrace
+#### Hadoop MapReduce
+Afin de se familiariser avec Hadoop MapReduce et de pouvoir tester notre application, nous avons
+créer un mini-projet WordCount, application considérée comme le `Hello World` d'Hadoop MapReduce.
+Ce mini-projet a été découpé en deux modules Maven :
+
+* hadoop-application : le WordCount à proprement parlé, qui contient les trois classes nécessaires
+  à l'implémentation d'un MapReduce.
+* hadoop-agent : l'ensemble des fichiers sources permettant d'instrumenter notre application
+
+Notre WordCount contient trois classes : la classe WorCount qui permet de lancer l'application, et
+les classes Map et Reduce qui sont celles à instrumenter. Ces classes surchargent les méthodes map
+et reduce, méthodes qui définissent le comportement de l'application.
+
+Une application utilisant Map Reduce fonctionne comme suit :
+- Les données d'entrée sont partitionnées et envoyées au noeuds du cluster Hadoop : chaque noeud
+  a donc une partie des données à traiter. Les données de notre WordCount sont tout simpement les
+  caractères d'un fichier texte. Chaque noeud a donc plusieurs lignes de ce fichier.
+- Chaque noeud effectue un premier traitement sur sa partition de données : le map, que l'utilisateur
+  doit implémenter. ... A compléter.
+
+#### JNI :Java Native Interface
+#### L'instrumentation Java avec Javassist
+#### Création d'un module ezTrace
 
 ### Réalisation du module HadoopTrace
+A ce stade, nous avions une idée bien plus précise du logiciel à programmer :
+TODO : Schéma du module.
 
 ## Analyse des performances
 - Analyses sur la machine 32 coeurs
