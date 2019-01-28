@@ -149,17 +149,14 @@ qui nous interessent.
 A ce stade, nous avions une idée bien plus précise du logiciel à programmer :
 ![Schéma du plugin HadoopTrace et de son fonctionnement](./images/hadoopTrace.png)
 
-Afin de se familiariser avec Hadoop MapReduce et de pouvoir tester notre application, nous avons
-créer un mini-projet WordCount, application considérée comme le `Hello World` d'Hadoop MapReduce.
-Ce mini-projet a été découpé en deux modules Maven :
+* __L'agent java__ : une classe agent qui instrumente les classes à l'aide de d'un deuxième classe, transformer, et
+  une troisième classe définissant les prototypes de fonctions à utiliser avec JNI. Notre transformer doit insérer
+  l'instanciation d'un objet `HadoopTrace` (JNI) ainsi que l'appel des fonctions prolog et epilog, respectivement
+  avant et après les méthodes map et reduce.
+* __Le module ezTrace__ : les bibliothèque partagées ezTrace. La première implémentant les fonctions définit via JNI
+  et permettant d'enregistrer des évènements à l'execution, la deuxième permettant de convertir les traces générées.
 
-* __<u>hadoop-application</u>__ : le WordCount à proprement parlé, qui contient les trois classes nécessaires
-  à l'implémentation d'un MapReduce.
-* __<u>hadoop-agent</u>__ : l'ensemble des fichiers sources permettant d'instrumenter notre application
-
-Notre WordCount contient trois classes : la classe WorCount qui permet de lancer l'application, et
-les classes Map et Reduce qui sont celles à instrumenter. Ces classes surchargent les méthodes map
-et reduce, méthodes qui définissent le comportement de l'application.
+Nous avons actuellement réalisé un prototype de cet agent sous forme d'un module maven.
 
 ## Analyse des performances
 - Analyses sur la machine 32 coeurs
