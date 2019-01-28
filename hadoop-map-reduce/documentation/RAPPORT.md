@@ -66,7 +66,7 @@ Dans le cadre du projet, on souhaite analyser la répartition de charge entre le
 repérer l'execution des fonctions maps et reduces sur les différents noeuds, puisque ce sont ces
 fonctions qui réalisent des calculs. Ce sont donc ces deux fonctions que l'on a cherché à instrumenter.
 
-#### JNI :Java Native Interface
+#### JNI : Java Native Interface
 JNI regroupe toute les commandes et fichiers sources permettant d'éxecuter du code écrit en C, dit natif,
 à partir d'une application Java.
 
@@ -129,7 +129,7 @@ après chaque appels des fonctions maps et reduce.
 
 ### Réalisation du module HadoopTrace
 A ce stade, nous avions une idée bien plus précise du logiciel à programmer :
-TODO : Schéma du module.
+![Schéma du plugin HadoopTrace et de son fonctionnement](./images/hadoopTrace.png)
 
 Afin de se familiariser avec Hadoop MapReduce et de pouvoir tester notre application, nous avons
 créer un mini-projet WordCount, application considérée comme le `Hello World` d'Hadoop MapReduce.

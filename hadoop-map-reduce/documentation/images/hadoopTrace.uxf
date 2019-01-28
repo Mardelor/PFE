@@ -9,23 +9,24 @@
       <w>270</w>
       <h>117</h>
     </coordinates>
-    <panel_attributes>Application
+    <panel_attributes>Application Hadoop
 --
 --
 public class MapClass extends Mapper {
 @Override
 protected void map(...) {
     ...
-}</panel_attributes>
+}
+bg=light_gray</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>342</x>
+      <x>153</x>
       <y>459</y>
       <w>369</w>
-      <h>153</h>
+      <h>144</h>
     </coordinates>
     <panel_attributes>Transformer.java
 --
@@ -36,31 +37,33 @@ public byte[] transform(... Class class...) {
     method.addBefore("hTrace.registerMapperProlog()");
     method.addAfter("hTrace.registerMapperEpilog()");
     ...
-}</panel_attributes>
+}
+layer=2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>342</x>
-      <y>378</y>
+      <x>153</x>
+      <y>387</y>
       <w>369</w>
       <h>54</h>
     </coordinates>
     <panel_attributes>Agent.java
 --
-public static void premain(... Instrumentation inst)</panel_attributes>
+public static void premain(... Instrumentation inst)
+layer=2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>720</x>
+      <x>711</x>
       <y>180</y>
-      <w>288</w>
+      <w>306</w>
       <h>153</h>
     </coordinates>
-    <panel_attributes>Application
+    <panel_attributes>Application Hadoop
 --
 --
 public class MapClass extends Mapper {
@@ -70,14 +73,15 @@ public class MapClass extends Mapper {
         hTrace.registerMapperProlog();
         ...
         hTrace.registerMapperEpilog();
-}</panel_attributes>
+}
+bg=light_gray</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>783</x>
-      <y>378</y>
+      <x>549</x>
+      <y>387</y>
       <w>189</w>
       <h>90</h>
     </coordinates>
@@ -86,26 +90,27 @@ public class MapClass extends Mapper {
 registerMapperProlog()
 registerMapperEpilog()
 registerReducerProlog()
-registerReducerEpilog()</panel_attributes>
+registerReducerEpilog()
+layer=2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>783</x>
-      <y>486</y>
+      <x>549</x>
+      <y>630</y>
       <w>189</w>
-      <h>126</h>
+      <h>117</h>
     </coordinates>
-    <panel_attributes>libhadooptrace.so
+    <panel_attributes>eztrace_HadoopTrace.h
 --
-#include "eztrace.h"
+#include &lt;jni.h&gt;
 
-registerMapperProlog() {...}
-registerMapperEpilog() {...}
-registerReducerProlog() {...}
-registerReducerEpilog() {...}
-
+JNI registerMapperProlog();
+JNI registerMapperEpilog();
+JNI registerReducerProlog();
+JNI registerReducerEpilog();
+layer=3
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -114,69 +119,131 @@ registerReducerEpilog() {...}
     <coordinates>
       <x>396</x>
       <y>234</y>
-      <w>342</w>
+      <w>333</w>
       <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
-    <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>350.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>522</x>
+      <x>414</x>
       <y>243</y>
       <w>27</w>
-      <h>153</h>
+      <h>162</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>522</x>
-      <y>423</y>
+      <x>333</x>
+      <y>432</y>
       <w>27</w>
-      <h>54</h>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>711</x>
+      <y>324</y>
+      <w>27</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>639</x>
+      <y>468</y>
+      <w>27</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>297</x>
+      <x>135</x>
       <y>333</y>
-      <w>711</w>
-      <h>315</h>
+      <w>882</w>
+      <h>432</h>
     </coordinates>
     <panel_attributes>HadoopTrace
 --
-bg=light_gray</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
+    <id>UMLClass</id>
     <coordinates>
-      <x>873</x>
-      <y>324</y>
-      <w>27</w>
-      <h>72</h>
+      <x>765</x>
+      <y>630</y>
+      <w>234</w>
+      <h>117</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <panel_attributes>hadooptrace.c
+--
+#include "eztrace.h"
+#include "hadooptrace_ev_code.h"
+#include "eztrace_HadoopTrace.h"
+...
+
+layer=3</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
+    <id>UMLClass</id>
     <coordinates>
-      <x>873</x>
-      <y>459</y>
-      <w>27</w>
-      <h>45</h>
+      <x>765</x>
+      <y>531</y>
+      <w>234</w>
+      <h>72</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+    <panel_attributes>hadooptrace_ev_codes.h
+--
+#include "ev_code.h"
+...
+layer=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>144</x>
+      <y>360</y>
+      <w>603</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>hadoopTrace.jar
+--
+layer=1
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>540</x>
+      <y>504</y>
+      <w>468</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>libhadooptrace.so
+--
+layer=2
+
+bg=white</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
