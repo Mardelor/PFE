@@ -19,16 +19,16 @@ pour permettre de profiler les applications utilisant le framework Hadoop, lui �
 L'objectif général du projet était de contribuer au projet EzTrace, en ouvrant la voie sur
 le profiling d'applications Java. Nous nous sommes donc fixé trois objectifs :
 
-- Créer un module ezTrace pour Hadoop MapReduce
-- Faciliter la création de modules ezTrace pour des applications Java
-- Tester le module ezTrace pour limiter l'overhead induit par son utilisation
+* Créer un module ezTrace pour Hadoop MapReduce
+* Faciliter la création de modules ezTrace pour des applications Java
+* Tester le module ezTrace pour limiter l'overhead induit par son utilisation
 
 Pour cela, nous avons du nous familiariser avec plusieurs technologies :
 
-- Le fonctionnement du framework Hadoop MapReduce et d'HDFS (Hadoop Data File System)
-- Java Native Interface (JNI), afin d'appeler des bibliothèques écrites en C depuis du Java
-- L'instrumentation en Java, avec l'utilisation de Javassist notamment
-- La création d'un module ezTrace
+* Le fonctionnement du framework Hadoop MapReduce et d'HDFS (Hadoop Data File System)
+* Java Native Interface (JNI), afin d'appeler des bibliothèques écrites en C depuis du Java
+* L'instrumentation en Java, avec l'utilisation de Javassist notamment
+* La création d'un module ezTrace
 
 ## Réalisation
 Nous avons tout d'abord réaliser des mini-projets pour maîtriser JNI, l'instrumentation Java
@@ -47,14 +47,17 @@ Voici les différentes fonctions sur l'exemple WordCount que l'on a implémenté
 
 ![Fonctionnement du MapReduce sur le WordCount](./images/mapreduce-fonctionnement.png)
 
-- Splitting : Les données en entrée sont tout d'abord partitionnées pour être envoyés sur les noeuds du cluster :
+* Splitting : Les données en entrée sont tout d'abord partitionnées pour être envoyés sur les noeuds du cluster :
   chaque noeud est ainsi responsable d'une partie des données
-- **Map** : Cette fontion réalise le premier traitement effectué sur les données : il doit avoir pour sortie
+
+* **Map** : Cette fontion réalise le premier traitement effectué sur les données : il doit avoir pour sortie
   un ensemble de couple clé-valeur. Dans le cas d'un WordCount, les clés sont les mots et les valeurs associées
   sont le nombre d'occurences du mot dans la partition de données traitées par le noeud.
-- Group by Key/Shuffling : Les données sont regroupé par clés. Tout les couples ayant une même clés sont envoyé
+
+* Group by Key/Shuffling : Les données sont regroupé par clés. Tout les couples ayant une même clés sont envoyé
   sur le même noeud.
-- **Reduce** : Cette fonction réalise le second traitement sur les données : il prend en entré des ensemble de
+
+* **Reduce** : Cette fonction réalise le second traitement sur les données : il prend en entré des ensemble de
   couples ayant la même clé, et dépend complètement l'application. Dans le cas du WordCount, on additionne,
   pour chaque clé, toute les valeurs des couple ayant cette clé. On obtient ainsi l'occurence du mot dans tout
   le fichier d'entrée.
@@ -126,6 +129,21 @@ Dans le cadre de notre projet, il suffit de créer un transformer qui ajoute des
 après chaque appels des fonctions maps et reduce.
 
 #### Création d'un module ezTrace
+Pour créer un module ezTrace, il suffit de créer trois fichiers :
+* le fichier ev_code : ce fichier rassemble tout les codes des évènements que l'on veut enregistrer, soit deux par
+  fonctions, l'entré et sortie de la fonction. EzTrace fonctionne en effet avec des codes d'évènements sur 4 octets.
+  Le premier est reservé au fonctionnement interne d'EzTrace, le second sert à identifier le/la framework/bibliothèque
+  utilisé(e), et les deux derniers l'évènement.
+
+* le fichier coeur, qui contient les évènements à enregistré lors de l'appel des fonctions. L'interception des
+  fonctions de la bibliothèque à profiler est faite en créant des fonctions qui ont le même prototype, et qui
+  appelles les fonctions originales :
+
+* le fichier permettant la conversion de la trace générée.
+
+Pour le profilage du framework hadoop, la création du fichier coeur est nettement plus simple, puisque l'on a pas
+à conserver le pointeur de fonctions vers la fonction originale. Il suffit simplement d'enregistrer les évènements
+qui nous interessent.
 
 ### Réalisation du module HadoopTrace
 A ce stade, nous avions une idée bien plus précise du logiciel à programmer :
@@ -135,9 +153,9 @@ Afin de se familiariser avec Hadoop MapReduce et de pouvoir tester notre applica
 créer un mini-projet WordCount, application considérée comme le `Hello World` d'Hadoop MapReduce.
 Ce mini-projet a été découpé en deux modules Maven :
 
-* hadoop-application : le WordCount à proprement parlé, qui contient les trois classes nécessaires
+* __<u>hadoop-application</u>__ : le WordCount à proprement parlé, qui contient les trois classes nécessaires
   à l'implémentation d'un MapReduce.
-* hadoop-agent : l'ensemble des fichiers sources permettant d'instrumenter notre application
+* __<u>hadoop-agent</u>__ : l'ensemble des fichiers sources permettant d'instrumenter notre application
 
 Notre WordCount contient trois classes : la classe WorCount qui permet de lancer l'application, et
 les classes Map et Reduce qui sont celles à instrumenter. Ces classes surchargent les méthodes map
