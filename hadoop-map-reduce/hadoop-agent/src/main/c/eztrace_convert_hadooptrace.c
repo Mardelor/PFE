@@ -28,6 +28,7 @@ void libinit(void) {
      * This function usually declared StateTypes, LinkTypes, etc.
      */
     hadoop_module.init = eztrace_convert_hadoop_init;
+    hadoop_module.api_version = EZTRACE_API_VERSION;
 
     /* Specify the function to call for handling an event
      */
@@ -180,7 +181,7 @@ void handle_hadoop_map_entry() {
     /* Update the state of the thread in the output trace. */CHANGE()
         pushState(CURRENT, "ST_Thread", thread_id, "map_alias");
 
-    free(thread_id);
+    //    free(thread_id);
 }
 
 /* This function is called by handle_example_events when reaching
@@ -195,7 +196,7 @@ void handle_hadoop_map_exit() {
      */CHANGE()
         popState(CURRENT, "ST_Thread", thread_id);
 
-    free(thread_id);
+    //    free(thread_id);
 }
 
 /* This function is called by handle_example_events when reaching
@@ -208,7 +209,7 @@ void handle_hadoop_reduce_entry() {
     /* Update the state of the thread in the output trace. */CHANGE()
         pushState(CURRENT, "ST_Thread", thread_id, "function2_alias");
 
-    free(thread_id);
+    //    free(thread_id);
 }
 
 /* This function is called by handle_example_events when reaching
@@ -223,5 +224,5 @@ void handle_hadoop_reduce_exit() {
      */CHANGE()
         popState(CURRENT, "ST_Thread", thread_id);
 
-    free(thread_id);
+    //    free(thread_id);
 }
