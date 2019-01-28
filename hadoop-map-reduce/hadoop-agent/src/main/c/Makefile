@@ -1,4 +1,4 @@
-JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 BIN = libeztrace-hadoop.so libeztrace-autostart-hadoop.so libeztrace-convert-hadoop.so
 

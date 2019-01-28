@@ -95,7 +95,7 @@ extern "C" {
  * Method:    function
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_HadoopTrace_mapProlog
+JNIEXPORT void JNICALL Java_MyClass_function
         (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -106,7 +106,25 @@ JNIEXPORT void JNICALL Java_HadoopTrace_mapProlog
 Il faut alors compiler le fichier source en tant que bibliothèque partagée. Cette dernière sera alors chargée
 au chargement de la classe grâce au bloc static décrit dans MyClass.java.
 
+Pour notre projet, nous nous somme servie de JNI pour implémenter les fonctions à executer avant et après les
+appels des fonctions map et reduce, en utilisant les bibliothèques ezTrace.
+
 #### L'instrumentation Java avec Javassist
+L'instrumentation en Java est native, c'est-à-dire qu'elle est déjà prévu par le langage : en effet il suffit
+pour cela de créer ce qu'on appel un agent. Un agent est tout simplement une classe qui contient la methode
+`static void premain(String, Instrumentation)`, méthode executée avant le main lorsque l'on précise l'option `javaagent`
+à l'execution d'une application Java.
+
+Pour modifier le code à l'execution, cet agent doit être accompagné d'un ou plusieurs objet de type
+`java.lang.instrument.ClassFileTransformer`, qui specifie le code à ajouter à l'execution. Pour implémenter son
+propre transformer, il suffit de surcharger la méthode `transform`, qui prend est executé pour chaque `.class`,
+et qui prend en entré le nom de la classe et le byteCode de la classe notamment, et en sortie le nouveau byteCode
+de cette classe. Afin de pouvoir modifier ce dernier facilement, nous avons utilisé Javassist. Cette bibliothèque
+fournit un ensemble de classe et méthode facilitant l'injection de byteCode.
+
+Dans le cadre de notre projet, il suffit de créer un transformer qui ajoute des appels appropriés en C avant et
+après chaque appels des fonctions maps et reduce.
+
 #### Création d'un module ezTrace
 
 ### Réalisation du module HadoopTrace
