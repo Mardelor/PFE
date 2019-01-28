@@ -158,10 +158,8 @@ A ce stade, nous avions une idée bien plus précise du logiciel à programmer :
 
 Nous avons actuellement réalisé un prototype de cet agent sous forme d'un module maven.
 
-## Analyse des performances
-- Analyses sur la machine 32 coeurs
-
-## Améliorations possibles
+## Fin du projet et améliorations possibles
+- Analyse de performances
 - Système permettant de merge les traces générées sur HDFS
 - Plugin ezTrace pour faciliter la création de modules ezTrace pour des
   API Java
