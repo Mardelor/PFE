@@ -67,8 +67,8 @@ void libfinalize(void) {
  * This function usually declared StateTypes, LinkTypes, etc.
  */
 int eztrace_convert_hadoop_init() {
-    addEntityValue("map_alias", "ST_Thread", "Doing Map", GTG_SEABLUE);
-    addEntityValue("reduce_alias", "ST_Thread", "Doing Reduce", GTG_YELLOW);
+    addEntityValue("map_alias", "ST_Thread", "Doing Map", GTG_YELLOW);
+    addEntityValue("reduce_alias", "ST_Thread", "Doing Reduce", GTG_SEABLUE);
     return 0;
 }
 

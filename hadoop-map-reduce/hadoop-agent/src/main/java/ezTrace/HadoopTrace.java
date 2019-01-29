@@ -20,6 +20,6 @@ public class HadoopTrace {
      * Load native library
      */
     static {
-        System.loadLibrary("eztrace-hadoop");
+        System.loadLibrary("eztrace-autostart-hadoop");
     }
 }
