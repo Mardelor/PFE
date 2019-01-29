@@ -1,42 +1,20 @@
-# HadoopTrace - Rapport de Projet de fin d'étude
+%HadoopTrace - Rapport de Projet de fin d'étude
+%![](./Logo.png){ width=20% }
+%**Rédigé par** : Dan Nguyen, Rémy Zirnheld, **Encadré par** : François Trahay
 
-![](./Logo.png){ width=20% } Rédigé par : Dan Nguyen, Rémy Zirnheld,
-Encadrant : François Trahay
-
+\newpage
 ## Introduction
 Depuis les premiers pas d'Hadoop au début des années 2000, beaucoup de frameworks permettant de
 faire du calcul distribué pour traiter des gros volumes de données ont vu le jour :
-ElasticSearch, Storm ou plus récemment Spark. Aujourd'hui, peu d'outils existent pour profiler
-les applications utilisant ces frameworks, la plupart de ces outils servant pour le calcul
-haute performance.
+ElasticSearch, Storm ou plus récemment Spark. Aujourd'hui, peu d'outils existent pour profiler les
+applications utilisant ces frameworks, la plupart de ces outils servant pour le calcul haute performance.
 
 EzTrace est l'un de ces outils : écrit en C, il permet de profiler des applications elles aussi
-écrites en C utilisant les frameworks classiques tels que OMP ou MPI, ou plus récemment CUDA.
+écrites en C utilisant les frameworks classiques tels que OMP ou MPI, ou des plus récent comme CUDA.
 Le projet HadoopTrace a justement pour objectif d'étendre les champs d'application d'ezTrace
 pour permettre de profiler les applications utilisant le framework Hadoop qui lui est écrit en Java.
+Nous nous interessons plus particulièrement au framework Hadoop MapReduce.
 
-## Objectifs du projet
-L'objectif général du projet est de contribuer au projet EzTrace, en ouvrant la voie sur
-le profiling d'applications Java. Nous nous sommes donc fixé trois objectifs :
-
-* Créer un module ezTrace pour Hadoop MapReduce
-* Faciliter la création de modules ezTrace pour des applications Java
-* Tester le module ezTrace pour limiter l'overhead induit par son utilisation
-
-Pour cela, nous avons dû nous familiariser avec plusieurs technologies :
-
-* Le fonctionnement du framework Hadoop MapReduce et d'HDFS (Hadoop Data File System)
-* Java Native Interface (JNI), afin d'appeler des bibliothèques écrites en C depuis une application Java
-* L'instrumentation en Java, avec l'utilisation de Javassist notamment
-* La création d'un module ezTrace
-
-## Réalisation
-Nous avons tout d'abord réalisé des mini-projets pour maîtriser JNI, l'instrumentation Java
-et le framework Hadoop MapReduce. Nous avons ensuite fusionné ces mini-projets afin d'aboutir
-à un prototype stable et fonctionnel du module ezTrace final.
-
-### Prise en main des outils
-#### Hadoop MapReduce
 Le MapReduce est un paradigme de programmation permettant d'effectuer des traitements relativement
 simples sur de gros volumes de données. Développé chez Google par Jeffrey Dean et Sanjay Ghemawat,
 il simplifie grandement le passage à l'échelle ainsi que la gestion des fautes.
@@ -45,7 +23,7 @@ Le traitement de données utilisant le paradigme de programmation MapReduce est 
 différentes étapes, dont deux sont implémentées par l'utilisateur : Map et Reduce.
 Voici les différentes fonctions sur l'exemple WordCount que l'on a implémenté :
 
-![Fonctionnement du MapReduce sur le WordCount](./images/mapreduce-fonctionnement.png)
+![Fonctionnement du MapReduce sur le WordCount](./images/mapreduce-fonctionnement.png){ width=90% }
 
 * Splitting : Les données en entrée sont tout d'abord partitionnées pour être envoyées sur les noeuds du cluster :
   chaque noeud est ainsi responsable d'une partie des données
@@ -66,9 +44,31 @@ Ce paradigme de programmation peut être utilisé pour d'autres problèmes, tel 
 d'analyse de données.
 
 Dans le cadre du projet, on souhaite analyser la répartition de charge entre les noeuds du cluster, et donc
-repérer l'exécution des fonctions maps et reduces sur les différents noeuds, puisque ce sont ces
-fonctions qui réalisent des calculs. Ce sont donc ces deux fonctions que l'on a cherché à instrumenter.
+repérer l'exécution des fonctions maps et reduces sur les différents noeuds.
 
+\newpage
+## I. Objectifs du projet
+L'objectif général du projet est de contribuer au projet EzTrace, en ouvrant la voie sur
+le profiling d'applications Java. Nous nous sommes donc fixé trois objectifs :
+
+* Créer un module ezTrace pour Hadoop MapReduce
+* Faciliter la création de modules ezTrace pour des applications Java
+* Tester le module ezTrace pour limiter l'overhead induit par son utilisation
+
+Pour cela, nous avons dû nous familiariser avec plusieurs technologies :
+
+* Le fonctionnement du framework Hadoop MapReduce et d'HDFS (Hadoop Data File System)
+* Java Native Interface (JNI), afin d'appeler des bibliothèques écrites en C depuis une application Java
+* L'instrumentation en Java, avec l'utilisation de Javassist notamment
+* La création d'un module ezTrace
+
+\newpage
+## II. Réalisation
+Nous avons tout d'abord réalisé des mini-projets pour maîtriser JNI, l'instrumentation Java
+et le framework Hadoop MapReduce. Nous avons ensuite fusionné ces mini-projets afin d'aboutir
+à un prototype stable et fonctionnel du module ezTrace final.
+
+### Prise en main des outils
 #### JNI : Java Native Interface
 JNI regroupe toutes les commandes et fichiers sources permettant d'exécuter du code écrit en C, dit natif,
 à partir d'une application Java.
@@ -126,10 +126,11 @@ de cette classe. Afin de pouvoir modifier ce dernier facilement, nous avons util
 fournit un ensemble de classes et méthodes facilitant l'injection de byteCode.
 
 Dans le cadre de notre projet, il suffit de créer un transformer qui ajoute des appels appropriés en C avant et
-après chaque appel des fonctions maps et reduce.
+après chaque appel des fonctions map et reduce.
 
 #### Création d'un module ezTrace
 Pour créer un module ezTrace, il suffit de créer trois fichiers :
+
 * le fichier ev_code : ce fichier rassemble tous les codes des évènements que l'on veut enregistrer, soit deux par
   fonctions, l'entrée et sortie de la fonction. EzTrace fonctionne en effet avec des codes d'évènements sur 4 octets.
   Le premier est reservé au fonctionnement interne d'EzTrace, le second sert à identifier le/la framework/bibliothèque
@@ -147,7 +148,8 @@ qui nous intéressent.
 
 ### Réalisation du module HadoopTrace
 A ce stade, nous avions une idée bien plus précise du logiciel à programmer :
-![Schéma du plugin HadoopTrace et de son fonctionnement](./images/hadoopTrace.png)
+
+![Schéma du plugin HadoopTrace et de son fonctionnement](./images/hadoopTrace.png){ width=90% }
 
 * __L'agent java__ : une classe agent qui instrumente les classes à l'aide d'une deuxième classe, transformer, et
   une troisième classe définissant les prototypes de fonctions à utiliser avec JNI. Notre transformer doit insérer
@@ -161,14 +163,23 @@ Nous avons actuellement réalisé un prototype de cet agent sous forme d'un modu
 sources ainsi que les deux fichiers compilés. Sur l'exemple du WordCount, cela nous a permis de générer des premières
 traces :
 
-TODO : screen trace
+![Trace WordCount sur un noeud Hadoop](./images/wordcount_trace.png){ width=90% }
+
+TODO : interprétation ?
+
+\newpage
 
 ## Fin du projet et améliorations possibles
-Il reste maitenant la phase de tests et d'optimisation de notre module ezTrace : en effet, l'utilisation d'ezTrace
+Il reste maintenant la phase de tests et d'optimisation de notre module ezTrace : en effet, l'utilisation d'ezTrace
 doit impacter le moins possible sur les performances des applications Hadoop. Il est donc nécessaire d'effectuer
 des mesures sur les temps d'exécution d'une même application avec et sans ezTrace.
 
-- Analyse de performances
-- Système permettant de merge les traces générées sur HDFS
-- Plugin ezTrace pour faciliter la création de modules ezTrace pour des
-  API Java
+Une continuation du projet serait donc de trouver des benshmark hadoop et de mesurer les temps d'execution avec et
+sans module ezTrace, afin d'obtenir une idée de l'overhead induit par ezTrace sur hadoop.
+
+### Améliorations possibles
+Même en ayant un module ezTrace performant, nous pourrions avoir, au mieux, une trace d'éxecution de chaque noeud, et
+non de l'application entière. De manière similaire à ce que fait ezTrace avec MPI, il reste à implémenter la partie
+permettant de fusionner les traces des noeuds pour avoir une trace globale de l'execution d'applications. De plus,
+il reste également à explorer le fonctionnement d'HDFS afin de savoir comment sont stocké les traces générées à
+l'éxecution.
