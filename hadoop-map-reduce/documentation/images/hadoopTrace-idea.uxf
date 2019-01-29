@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>459</x>
+      <y>189</y>
+      <w>270</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>Application Hadoop
+--
+--
+public class MapClass extends Mapper {
+@Override
+protected void map(...) {
+    ...
+}
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>585</x>
+      <y>297</y>
+      <w>27</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>306</x>
+      <y>333</y>
+      <w>585</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>HadoopTrace
+--
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>324</x>
+      <y>369</y>
+      <w>243</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>hadoopTrace
+--
+Intercepte les appels
+aux méthodes Hadoop
+layer=1
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>648</x>
+      <y>369</y>
+      <w>225</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>libhadooptrace.so
+--
+Enregistre des évènements
+layer=2
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>558</x>
+      <y>414</y>
+      <w>108</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Appelle</panel_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>918</x>
+      <y>396</y>
+      <w>108</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>EzTrace
+bg=green
+fg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>864</x>
+      <y>423</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -64,12 +64,18 @@ Pour cela, nous avons dû nous familiariser avec plusieurs technologies :
 
 \newpage
 ## II. Réalisation
-Nous avons tout d'abord réalisé des mini-projets pour maîtriser JNI, l'instrumentation Java
+Le logiciel à réaliser doit intercepter des appels à des méthodes Java puis appeler des fonctions d'une
+bibliothèque partagée en C chargé d'enregistrer des évènements :
+
+![Schéma simple du plugin Hadoop](./images/hadoopTrace-idea.png){ width=80% }
+
+Afin de pouvoir realiser le plugin, nous avons d'abord chercher les bibliothèques et technologies à utiliser.
+C'est pourquoi nous avons tout d'abord réalisé des mini-projets pour maîtriser JNI, l'instrumentation Java
 et le framework Hadoop MapReduce. Nous avons ensuite fusionné ces mini-projets afin d'aboutir
 à un prototype stable et fonctionnel du module ezTrace final.
 
-### Prise en main des outils
-#### JNI : Java Native Interface
+### 1.Prise en main des outils
+#### 1.1. JNI : Java Native Interface
 JNI regroupe toutes les commandes et fichiers sources permettant d'exécuter du code écrit en C, dit natif,
 à partir d'une application Java.
 
@@ -112,7 +118,7 @@ au même moment que la classe grâce au bloc static décrit dans MyClass.java.
 Pour notre projet, nous nous somme servis de JNI pour implémenter les fonctions à exécuter avant et après les
 appels des fonctions map et reduce, en utilisant les bibliothèques ezTrace.
 
-#### L'instrumentation Java avec Javassist
+#### 1.2. L'instrumentation Java avec Javassist
 L'instrumentation en Java est native, c'est-à-dire qu'elle est déjà prévue par le langage : en effet il suffit
 pour cela de créer ce qu'on appelle un agent. Un agent est tout simplement une classe qui contient la méthode
 `static void premain(String, Instrumentation)`, méthode exécutée avant le main lorsque l'on précise l'option `javaagent`
@@ -128,7 +134,7 @@ fournit un ensemble de classes et méthodes facilitant l'injection de byteCode.
 Dans le cadre de notre projet, il suffit de créer un transformer qui ajoute des appels appropriés en C avant et
 après chaque appel des fonctions map et reduce.
 
-#### Création d'un module ezTrace
+#### 1.3. Création d'un module ezTrace
 Pour créer un module ezTrace, il suffit de créer trois fichiers :
 
 * le fichier ev_code : ce fichier rassemble tous les codes des évènements que l'on veut enregistrer, soit deux par
@@ -146,7 +152,7 @@ Pour le profilage du framework hadoop, la création du fichier coeur est netteme
 à conserver le pointeur de fonction vers la fonction originale. Il suffit simplement d'enregistrer les évènements
 qui nous intéressent.
 
-### Réalisation du module HadoopTrace
+### 2. Réalisation du module HadoopTrace
 A ce stade, nous avions une idée bien plus précise du logiciel à programmer :
 
 ![Schéma du plugin HadoopTrace et de son fonctionnement](./images/hadoopTrace.png){ width=90% }
@@ -165,11 +171,11 @@ traces :
 
 ![Trace WordCount sur un noeud Hadoop](./images/wordcount_trace.png){ width=90% }
 
-TODO : interprétation ?
+
 
 \newpage
 
-## Fin du projet et améliorations possibles
+## III. Fin du projet et améliorations possibles
 Il reste maintenant la phase de tests et d'optimisation de notre module ezTrace : en effet, l'utilisation d'ezTrace
 doit impacter le moins possible sur les performances des applications Hadoop. Il est donc nécessaire d'effectuer
 des mesures sur les temps d'exécution d'une même application avec et sans ezTrace.
