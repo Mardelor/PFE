@@ -156,9 +156,17 @@ A ce stade, nous avions une idée bien plus précise du logiciel à programmer :
 * __Le module ezTrace__ : les bibliothèque partagées ezTrace. La première implémentant les fonctions définit via JNI
   et permettant d'enregistrer des évènements à l'execution, la deuxième permettant de convertir les traces générées.
 
-Nous avons actuellement réalisé un prototype de cet agent sous forme d'un module maven.
+Nous avons actuellement réalisé un prototype de cet agent sous forme d'un module maven. Il contient tout les fichiers
+sources ainsi que les deux fichiers compilés. Sur l'exemple du WordCount, cela nous a permit de générer des premières
+traces :
+
+TODO : screen trace
 
 ## Fin du projet et améliorations possibles
+Il reste maitenant la phase de test et d'optimisation de notre module ezTrace : en effet, l'utilisation d'ezTrace
+doit impacter la moins possible sur les performances des applications Hadoop. Il est donc nécessaire d'effectuer
+des mesures sur les temps d'execution d'une même application avec et sans ezTrace.
+
 - Analyse de performances
 - Système permettant de merge les traces générées sur HDFS
 - Plugin ezTrace pour faciliter la création de modules ezTrace pour des
