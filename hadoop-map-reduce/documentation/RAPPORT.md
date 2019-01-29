@@ -44,7 +44,7 @@ Ce paradigme de programmation peut être utilisé pour d'autres problèmes, tel 
 d'analyse de données.
 
 Dans le cadre du projet, on souhaite analyser la répartition de charge entre les noeuds du cluster, et donc
-repérer l'exécution des fonctions maps et reduces sur les différents noeuds.
+repérer l'exécution des fonctions `map` et `reduce` sur les différents noeuds.
 
 \newpage
 ## I. Objectifs du projet
@@ -171,7 +171,8 @@ traces :
 
 ![Trace WordCount sur un noeud Hadoop](./images/wordcount_trace.png){ width=90% }
 
-
+Cette trace a été réalisée sur un petit fichier d'entré (une centaine de lignes) : on peut donc voir en jaune les
+appels aux méthodes `map`, en gris les appels aux méthodes `reduce`.
 
 \newpage
 
